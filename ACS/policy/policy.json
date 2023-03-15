@@ -1,0 +1,57 @@
+{
+    "policies": [
+        {
+            "id": "24cd42a2-b817-4a1d-a90a-f78b8bf908cc",
+            "name": "cosign-image-signature-verification",
+            "description": "",
+            "rationale": "",
+            "remediation": "",
+            "disabled": false,
+            "categories": [
+                "Security Best Practices"
+            ],
+            "lifecycleStages": [
+                "BUILD",
+                "DEPLOY"
+            ],
+            "eventSource": "NOT_APPLICABLE",
+            "exclusions": [],
+            "scope": [
+                {
+                    "cluster": "a710291f-aa6d-4167-868e-2a5808990723",
+                    "namespace": "demo",
+                    "label": null
+                }
+            ],
+            "severity": "HIGH_SEVERITY",
+            "enforcementActions": [],
+            "notifiers": [],
+            "lastUpdated": "2023-02-22T04:39:22.406148881Z",
+            "SORTName": "",
+            "SORTLifecycleStage": "",
+            "SORTEnforcement": false,
+            "policyVersion": "1.1",
+            "policySections": [
+                {
+                    "sectionName": "Policy Section 1",
+                    "policyGroups": [
+                        {
+                            "fieldName": "Image Signature Verified By",
+                            "booleanOperator": "OR",
+                            "negate": false,
+                            "values": [
+                                {
+                                    "value": "io.stackrox.signatureintegration.6d577835-3207-42de-b447-ee3b80dc5803"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "mitreAttackVectors": [],
+            "criteriaLocked": false,
+            "mitreVectorsLocked": false,
+            "isDefault": false
+        }
+    ]
+}
