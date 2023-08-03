@@ -14,7 +14,7 @@ spec:
     - name: git-revision
       value: master
     - name: IMAGE
-      value: 'quay.io/szemmour/pipelines-vote-api:unsigned2'
+      value: 'quay.io/szemmour/pipelines-vote-api:unsigned'
     - name: namespace
       value: demo
   pipelineRef:
