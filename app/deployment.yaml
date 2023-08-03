@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pipelines-vote-api
+  name: pipelines-vote-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pipelines-vote-api
+  template:
+    metadata:
+      labels:
+        app: pipelines-vote-api
+    spec:
+      containers:
+        - image: quay.io/openshift-pipeline/vote-api:latest
+          imagePullPolicy: Always
+          name: pipelines-vote-api
+          ports:
+            - containerPort: 9000
+              protocol: TCP
