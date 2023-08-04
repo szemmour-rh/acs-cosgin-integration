@@ -64,21 +64,21 @@ spec:
       - build-image
     taskRef:
       name: rhacs-image-check
-  # - name: apply-manifests
-  #   taskRef:
-  #     name: apply-manifests
-  #   workspaces:
-  #   - name: source
-  #     workspace: shared-workspace
-  #   runAfter:
-  #   - image-check
-  - name: update-deployment
+  - name: apply-manifests
     taskRef:
-      name: update-deployment
-    params:
-    - name: deployment
-      value: $(params.deployment-name)
-    - name: IMAGE
-      value: $(params.IMAGE)
+      name: apply-manifests
+    workspaces:
+    - name: source
+      workspace: shared-workspace
     runAfter:
     - image-check
+  # - name: update-deployment
+  #   taskRef:
+  #     name: update-deployment
+  #   params:
+  #   - name: deployment
+  #     value: $(params.deployment-name)
+  #   - name: IMAGE
+  #     value: $(params.IMAGE)
+  #   runAfter:
+  #   - image-check
