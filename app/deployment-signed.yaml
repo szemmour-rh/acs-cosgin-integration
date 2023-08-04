@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: pipelines-vote-api
-  name: pipelines-vote-api
+  name: pipelines-vote-api-signed
 spec:
   replicas: 1
   selector:
@@ -15,7 +15,7 @@ spec:
         app: pipelines-vote-api
     spec:
       containers:
-        - image: quay.io/szemmour/pipelines-vote-api:unsigned
+        - image: quay.io/szemmour/pipelines-vote-api:signed
           imagePullPolicy: Always
           name: pipelines-vote-api
           ports:

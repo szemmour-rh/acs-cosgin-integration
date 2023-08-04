@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: apply-manifests
+  name: apply-manifest-unsigned
 spec:
   workspaces:
   - name: source
@@ -9,7 +9,7 @@ spec:
     - name: manifest_dir
       description: The directory in source that contains yaml manifests
       type: string
-      default: "github.com/szemmour-rh/acs-cosgin-integration/app/?ref=dev"
+      default: "https://raw.githubusercontent.com/szemmour-rh/acs-cosgin-integration/dev/app/deployment-unsigned.yaml"
   steps:
     - name: apply
       image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
@@ -18,5 +18,5 @@ spec:
       args:
         - |-
           echo Applying manifests in $(inputs.params.manifest_dir) directory
-          oc apply -k $(inputs.params.manifest_dir) -n demo
+          oc create -f $(inputs.params.manifest_dir) -n demo
           echo -----------------------------------
