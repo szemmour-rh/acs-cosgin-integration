@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: vote-api
+  name: vote-api-unsigned
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vote-api
+  template:
+    metadata:
+      labels:
+        app: vote-api
+    spec:
+      containers:
+        - image: quay.io/szemmour/pipelines-vote-api:unsigned
+          imagePullPolicy: Always
+          name: vote-api
+          ports:
+            - containerPort: 9000
+              protocol: TCP

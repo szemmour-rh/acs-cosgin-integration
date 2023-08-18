@@ -1,0 +1,84 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: build-and-deploy-unsigned
+spec:
+  workspaces:
+  - name: shared-workspace
+  params:
+  - name: deployment-name
+    type: string
+    description: name of the deployment to be patched
+  - name: git-url
+    type: string
+    description: url of the git repo for the code of deployment
+  - name: git-revision
+    type: string
+    description: revision to be used from repo of the code for deployment
+    default: master
+  - name: IMAGE
+    type: string
+    description: image to be build from the code
+  - name: namespace
+    type: string
+  tasks:
+  - name: fetch-repository
+    taskRef:
+      name: git-clone
+      kind: ClusterTask
+    workspaces:
+    - name: output
+      workspace: shared-workspace
+    params:
+    - name: url
+      value: $(params.git-url)
+    - name: subdirectory
+      value: ""
+    - name: deleteExisting
+      value: "true"
+    - name: revision
+      value: $(params.git-revision)
+  - name: build-image
+    taskRef:
+      name: buildah
+      kind: ClusterTask
+    params:
+    - name: IMAGE
+      value: $(params.IMAGE)
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    runAfter:
+    - fetch-repository
+  - name: image-check
+    params:
+      - name: rox_api_token
+        value: roxcliauthsecret
+      - name: rox_central_endpoint
+        value: roxcliauthsecret
+      - name: image
+        value: $(params.IMAGE)
+      - name: insecure-skip-tls-verify
+        value: "true"
+    runAfter:
+      - build-image
+    taskRef:
+      name: rhacs-image-check
+  - name: apply-manifest-unsigned
+    taskRef:
+      name: apply-manifest-unsigned
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    runAfter:
+    - image-check
+  # - name: update-deployment
+  #   taskRef:
+  #     name: update-deployment
+  #   params:
+  #   - name: deployment
+  #     value: $(params.deployment-name)
+  #   - name: IMAGE
+  #     value: $(params.IMAGE)
+  #   runAfter:
+  #   - image-check
