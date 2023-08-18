@@ -4,7 +4,5 @@ resources:
 - apply-signed.yaml
 - apply-unsigned.yaml
 - cosign.yaml
-- image-check.yaml
-- image-scan.yaml
 - rhacs-image-check.yaml
 - update-deployement.yaml
