@@ -1,8 +1,8 @@
 {
     "policies": [
         {
-            "id": "24cd42a2-b817-4a1d-a90a-f78b8bf908cc",
-            "name": "cosign-image-signature-verification",
+            "id": "45bac426-d9ec-4249-8678-049e59c61757",
+            "name": "signature check",
             "description": "",
             "rationale": "",
             "remediation": "",
@@ -16,24 +16,21 @@
             ],
             "eventSource": "NOT_APPLICABLE",
             "exclusions": [],
-            "scope": [
-                {
-                    "cluster": "a710291f-aa6d-4167-868e-2a5808990723",
-                    "namespace": "demo",
-                    "label": null
-                }
+            "scope": [],
+            "severity": "MEDIUM_SEVERITY",
+            "enforcementActions": [
+                "SCALE_TO_ZERO_ENFORCEMENT",
+                "UNSATISFIABLE_NODE_CONSTRAINT_ENFORCEMENT"
             ],
-            "severity": "HIGH_SEVERITY",
-            "enforcementActions": [],
             "notifiers": [],
-            "lastUpdated": "2023-02-22T04:39:22.406148881Z",
+            "lastUpdated": "2023-08-14T20:08:20.627066177Z",
             "SORTName": "",
             "SORTLifecycleStage": "",
             "SORTEnforcement": false,
             "policyVersion": "1.1",
             "policySections": [
                 {
-                    "sectionName": "Policy Section 1",
+                    "sectionName": "signature  check",
                     "policyGroups": [
                         {
                             "fieldName": "Image Signature Verified By",
@@ -41,7 +38,7 @@
                             "negate": false,
                             "values": [
                                 {
-                                    "value": "io.stackrox.signatureintegration.6d577835-3207-42de-b447-ee3b80dc5803"
+                                    "value": "io.stackrox.signatureintegration.a56aaa55-082a-4d64-a048-f34c2d5c209e"
                                 }
                             ]
                         }
