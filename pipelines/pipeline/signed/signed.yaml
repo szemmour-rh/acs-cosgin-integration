@@ -79,11 +79,10 @@ spec:
       - sign-image
     taskRef:
       name: rhacs-image-check
+  finally:
   - name: apply-manifest-signed
     taskRef:
       name: apply-manifest-signed
     workspaces:
     - name: source
       workspace: shared-workspace
-    runAfter:
-    - image-check
