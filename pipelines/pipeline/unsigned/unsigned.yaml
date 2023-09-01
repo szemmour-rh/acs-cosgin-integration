@@ -64,14 +64,13 @@ spec:
       - build-image
     taskRef:
       name: rhacs-image-check
+  finally:
   - name: apply-manifest-unsigned
     taskRef:
       name: apply-manifest-unsigned
     workspaces:
     - name: source
       workspace: shared-workspace
-    runAfter:
-    - image-check
   # - name: update-deployment
   #   taskRef:
   #     name: update-deployment
