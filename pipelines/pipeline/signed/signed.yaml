@@ -68,9 +68,9 @@ spec:
   - name: image-check
     params:
       - name: rox_api_token
-        value: roxcliauthsecret
+        value: roxauthsecret
       - name: rox_central_endpoint
-        value: roxcliauthsecret
+        value: roxauthsecret
       - name: image
         value: $(params.IMAGE)
       - name: insecure-skip-tls-verify
